@@ -10,7 +10,7 @@ output:
     highlight: kate
 vignette: >
   %\VignetteEngine{knitr::rmarkdown}
-  %\VignetteIndexEntry{Your Vignette Title}
+  %\VignetteIndexEntry{Using machine learning to analyze evoked responses}
   %\VignetteEncoding{UTF-8}
 ---
 

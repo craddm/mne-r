@@ -10,7 +10,7 @@ output:
     highlight: kate
 vignette: >
   %\VignetteEngine{knitr::rmarkdown}
-  %\VignetteIndexEntry{Your Vignette Title}
+  %\VignetteIndexEntry{Fit multilevel model to evoked responses using lme4}
   %\VignetteEncoding{UTF-8}
 ---
 

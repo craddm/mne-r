@@ -10,7 +10,7 @@ output:
     highlight: kate
 vignette: >
   %\VignetteEngine{knitr::rmarkdown}
-  %\VignetteIndexEntry{Your Vignette Title}
+  %\VignetteIndexEntry{Processing MEG and EEG from raw to evoked}
   %\VignetteEncoding{UTF-8}
 ---
 
