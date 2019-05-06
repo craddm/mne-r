@@ -5,11 +5,11 @@
 \title{Get data from MNE into R data.frame}
 \usage{
 get_data_frame(inst, picks = NULL, index = NULL, scaling_time = 1000,
-  scalings = NULL, copy = T, start = NULL, stop = NULL,
-  long_format = T)
+  scalings = NULL, copy = TRUE, start = NULL, stop = NULL,
+  long_format = TRUE)
 }
 \arguments{
-\item{inst}{An instance of MNE data containsers, e.g,
+\item{inst}{An instance of MNE data containers, e.g,
 \code{mne$Epochs}, \code{mne$io$Raw}, \code{mne$Evoked}.}
 
 \item{picks}{A zero-indexed integer array, a string, list, slice or
@@ -46,7 +46,7 @@ are cleaned from white spaces to esnure that the R-formulas
 will work. In the case that epochs are passed, the pandas
 muliti-index is unpacked and the columns "condition",
 "epochs", and "time" are prepended. Unliker the
-MNE-Python function, the default is True.}
+MNE-Python function, the default is TRUE.}
 }
 \value{
 Returns a data.frame. The layout depends on the options
@@ -74,7 +74,7 @@ library(mne)
 fname <- paste(mne$datasets$testing$data_path(),
                "MEG", "sample", "sample_audvis_trunc_raw.fif",
                sep = "/")
-raw <- mne$io$read_raw_fif(fname, preload = T)
+raw <- mne$io$read_raw_fif(fname, preload = TRUE)
 raw_df <- get_data_frame(raw)
 print(head(raw_df))
 }

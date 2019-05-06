@@ -1,6 +1,3 @@
-library(tidyverse)
-library(reticulate)
-
 mne <- NULL
 
 .onLoad <- function(libname, pkgname) {
@@ -29,7 +26,7 @@ mne <- NULL
 #' mne/dev/auto_tutorials/plot_epochs_to_data_frame.html}{MNE
 #' tutorial}.
 #'
-#' @param inst An instance of MNE data containsers, e.g,
+#' @param inst An instance of MNE data containers, e.g,
 #'        \code{mne$Epochs}, \code{mne$io$Raw}, \code{mne$Evoked}.
 #' @param picks A zero-indexed integer array, a string, list, slice or
 #'        None.
@@ -58,7 +55,7 @@ mne <- NULL
 #'        will work. In the case that epochs are passed, the pandas
 #'        muliti-index is unpacked and the columns "condition",
 #'        "epochs", and "time" are prepended. Unliker the
-#'        MNE-Python function, the default is True.
+#'        MNE-Python function, the default is TRUE.
 #' @return Returns a data.frame. The layout depends on the options
 #'         (e.g. \code{long_format}) and the type of instance
 #'         (e.g. Epochs vs Raw).
@@ -68,13 +65,13 @@ mne <- NULL
 #' fname <- paste(mne$datasets$testing$data_path(),
 #'                "MEG", "sample", "sample_audvis_trunc_raw.fif",
 #'                sep = "/")
-#' raw <- mne$io$read_raw_fif(fname, preload = T)
+#' raw <- mne$io$read_raw_fif(fname, preload = TRUE)
 #' raw_df <- get_data_frame(raw)
 #' print(head(raw_df))
 get_data_frame <- function(inst, picks = NULL, index = NULL,
                            scaling_time = 1e3, scalings = NULL,
-                           copy = T, start = NULL, stop = NULL,
-                           long_format = T) {
+                           copy = TRUE, start = NULL, stop = NULL,
+                           long_format = TRUE) {
   # handle MNE python version
   inspect <- reticulate::import("inspect")
   to_df_args <- inspect$getargspec(inst$to_data_frame)$args
@@ -93,7 +90,7 @@ get_data_frame <- function(inst, picks = NULL, index = NULL,
     out <- do.call(inst$to_data_frame, .args)
     cat("Deleting whitespace in channel names ...")
     colnames(out) <- colnames(out) %>%
-      gsub(" ", "", x = ., fixed = T)
+      gsub(" ", "", x = ., fixed = TRUE)
    if ("mne.epochs.BaseEpochs" %in% class(inst)) {
      mindex <- attr(
        out, "pandas.index")$values %>% reticulate::py_to_r(.)
