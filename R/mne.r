@@ -1,13 +1,14 @@
-mne <- NULL
+mne <<- NULL
 
 .onLoad <- function(libname, pkgname) {
   # push MNE into global environment
   mne <<- reticulate::import("mne", delay_load = TRUE)
-  cat(
+  packageStartupMessage(
     sprintf(
       "Importing MNE version=%s, path='%s'\n", mne$`__version__`,
-      mne$`__path__`))
-  assign("mne", mne, .GlobalEnv)
+      mne$`__path__`)
+  )
+
 }
 
 #' Get data from MNE into R data.frame
@@ -61,13 +62,17 @@ mne <- NULL
 #'         (e.g. Epochs vs Raw).
 #' @export
 #' @examples
-#' library(mne)
-#' fname <- paste(mne$datasets$testing$data_path(),
+#' have_mne <- reticulate::py_module_available("mne")
+#'
+#' if (have_mne) {
+#'   library("mne")
+#'   fname <- paste(mne$datasets$testing$data_path(),
 #'                "MEG", "sample", "sample_audvis_trunc_raw.fif",
 #'                sep = "/")
-#' raw <- mne$io$read_raw_fif(fname, preload = TRUE)
-#' raw_df <- get_data_frame(raw)
-#' print(head(raw_df))
+#'   raw <- mne$io$read_raw_fif(fname, preload = TRUE)
+#'   raw_df <- get_data_frame(raw)
+#'   print(head(raw_df))
+#' }
 get_data_frame <- function(inst, picks = NULL, index = NULL,
                            scaling_time = 1e3, scalings = NULL,
                            copy = TRUE, start = NULL, stop = NULL,

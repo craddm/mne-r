@@ -70,11 +70,15 @@ mne/dev/auto_tutorials/plot_epochs_to_data_frame.html}{MNE
 tutorial}.
 }
 \examples{
-library(mne)
-fname <- paste(mne$datasets$testing$data_path(),
+have_mne <- reticulate::py_module_available("mne")
+
+if (have_mne) {
+  library("mne")
+  fname <- paste(mne$datasets$testing$data_path(),
                "MEG", "sample", "sample_audvis_trunc_raw.fif",
                sep = "/")
-raw <- mne$io$read_raw_fif(fname, preload = TRUE)
-raw_df <- get_data_frame(raw)
-print(head(raw_df))
+  raw <- mne$io$read_raw_fif(fname, preload = TRUE)
+  raw_df <- get_data_frame(raw)
+  print(head(raw_df))
+}
 }
