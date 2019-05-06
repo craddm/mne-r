@@ -1,3 +1,3 @@
 library(testthat)
 
-test_check(mne)
+test_check("mne")
