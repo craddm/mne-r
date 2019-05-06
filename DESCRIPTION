@@ -28,11 +28,8 @@ Suggests:
     knitr,
     rmarkdown,
     merTools,
-    eegUtils,
     testthat,
     stringr,
     tidyverse
 Depends:
     R (>= 3.0)
-Remotes:
-    craddm/eegUtils
