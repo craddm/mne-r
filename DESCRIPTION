@@ -21,12 +21,17 @@ RoxygenNote: 6.1.1
 Roxygen: list(markdown = TRUE)
 Imports: 
     reticulate,
-    tidyverse,
-    testthat
+    tidyr,
+    magrittr
 Suggests:
-    tidyverse,
     boot,
     lme4,
-    knittr,
+    knitr,
     rmarkdown,
-    merTools
+    merTools,
+    eegUtils,
+    testthat
+Depends:
+    R (>= 3.0)
+Remotes:
+    craddm/eegUtils
