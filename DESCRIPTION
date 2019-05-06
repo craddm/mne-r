@@ -29,7 +29,9 @@ Suggests:
     rmarkdown,
     merTools,
     eegUtils,
-    testthat
+    testthat,
+    stringr,
+    tidyverse
 Depends:
     R (>= 3.0)
 Remotes:
