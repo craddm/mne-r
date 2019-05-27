@@ -1,2 +1,5 @@
 ^mne\.Rproj$
 ^\.Rproj\.user$
+^README\.rmd$
+^docs$
+^\.matplotlib$

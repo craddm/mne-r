@@ -1,4 +1,4 @@
-mne <<- NULL
+mne <- NULL
 
 .onLoad <- function(libname, pkgname) {
   # push MNE into global environment
@@ -65,7 +65,7 @@ mne <<- NULL
 #' have_mne <- reticulate::py_module_available("mne")
 #'
 #' if (have_mne) {
-#'   library("mne")
+#'   library(mne)
 #'   fname <- paste(mne$datasets$testing$data_path(),
 #'                "MEG", "sample", "sample_audvis_trunc_raw.fif",
 #'                sep = "/")
@@ -168,4 +168,28 @@ get_long_format <- function(inst, picks, index, scaling_time,
   # XXX source estimate class is not yet handled.
   # Add error or support.
   return(out_df)
+}
+
+#' Retrieve channel locations from an MNE data structure
+#'
+#' @param inst An instance of MNE data containers, e.g,
+#'        \code{mne$Epochs}, \code{mne$io$Raw}, \code{mne$Evoked}.
+#' @export
+get_chan_locs <- function(inst,
+                          projection = c("stereographic", NULL)) {
+
+  ch_names <- inst$ch_names
+  ch_locs <- do.call(rbind,
+                     lapply(inst$info$chs,
+                            function(x) x$loc[1:3]))
+  colnames(ch_locs) <- c("x", "y", "z")
+
+  if (identical(projection, "stereographic")) {
+    sph_coords <- mne$transforms$`_cart_to_sph`(ch_locs)
+    ch_locs <- mne$transforms$`_pol_to_cart`(sph_coords[,c(3, 2)])
+    colnames(ch_locs) <- c("x", "y")
+  }
+
+  data.frame(channel = ch_names,
+             ch_locs)
 }
